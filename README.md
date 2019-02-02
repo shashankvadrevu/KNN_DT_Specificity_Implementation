@@ -1,8 +1,54 @@
-========
 Assignment-1
-========
+============
 
-## Installation Procedure:
+# K-Nearest Neighbours -- Specificity based model implementation for Scikit Learn
+
+## Requirement
+
+1. Choose the best k by k-fold cross validation
+
+We can use two implementation of SKlearn are available based on the requirements
+
+* [Model Selection class has KFold](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold). This can be used as a generator / iterator 
+
+* [Model Selection using GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn-model-selection-gridsearchcv) 
+
+where, cross validation parameter 
+
+	cv : int, cross-validation generator or an iterable, optional
+	
+2. shuffle the training data randomly before splitting it into groups to be used for cross validation
+
+* When GridSearchCV is used and cv is passed as int, it does not guarantee shuffle. Therefore, if we plan to use GridSearchCV it is better to use a cross validation generator and use this generator in GridSearchCV. 
+
+3. Training and Testing performance using k-fold cross validation, in terms of precision, recall, accuracy, sensitivity and specificity
+
+* GridSearchCV has model selection based on a parameter called **[Scoring ](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring)** . Arguments that can be passed to [Scoring](https://scikit-learn.org/stable/modules/model_evaluation.html#using-multiple-metric-evaluation) As an iterable of string metrics or As a dict mapping the scorer name to the scoring function. 
+
+## Gap
+
+* The metrics that are currently supported by SKlearn 0.20.2 are listed [here](https://scikit-learn.org/stable/modules/model_evaluation.html#common-cases-predefined-values). This list does not include Specificity. 
+
+* Alternatively if some other metrics are required, it is [suggested](https://scikit-learn.org/stable/modules/model_evaluation.html#using-multiple-metric-evaluation) to generate a confusion matrix and calculate required metrics.
+
+## Current Process
+
+### K-Nearest Neighbours 
+
+1. Pre-Process the data i.e. handle missing values, scale the values if required
+2. Split data into Train and Test
+3. For each neighbour initialize a KNN class, a cross-validation class
+4. Generate cross-validation Split generator
+5. For each Split, split train data into cross-validation holdout and rest
+6. Build the model on the rest of the data and use cross-validation holdout to predict cross-validation holdout values.
+7. Calculate confusion matrix based on actual cross-validation holdout values and predicted cross-validation holdout values.
+8. Based on confusion matrix values at each split calculate Recall, Precision, Specificity.
+9. Aggregate these values for each split 
+10. Average out accuracy measures values for each neighbour
+
+Select a model based on accuracy measures for each node.   
+
+# Installation Procedure:
 
 1. Check the version of pip on the local machine. PIP is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4 downloaded from [python.org](python.org). Just make sure to [upgrade pip](https://pip.pypa.io/en/stable/installing/#upgrading-pip). To use pipenv we would require python 3.6 or higher. To check if pip is install in the local machine, in terminal
 
