@@ -5,7 +5,7 @@ Assignment-1
 
 ## Requirement
 
-1. Choose the best k by k-fold cross validation
+1. Choose the best k by k-fold cross validation.
 
 We can use two implementation of SKlearn are available based on the requirements
 
