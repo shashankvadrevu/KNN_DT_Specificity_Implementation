@@ -46,7 +46,20 @@ where, cross validation parameter
 9. Aggregate these values for each split 
 10. Average out accuracy measures values for each neighbour
 
-Select a model based on accuracy measures for each node.   
+Select a model based on accuracy measures for each neighbour.   
+
+### Decision Trees 
+
+1. Pre-Process the data i.e. handle missing values, scale the values if required
+2. Split data into Train and Test
+3. For each depth of tree initialize a DT class, a cross-validation class
+4. Generate cross-validation Split generator
+5. For each Split, split train data into cross-validation holdout and rest
+6. Build the model on the rest of the data and use cross-validation holdout to predict cross-validation holdout values.
+7. Calculate confusion matrix based on actual cross-validation holdout values and predicted cross-validation holdout values.
+8. Based on confusion matrix values at each split calculate Recall, Precision, Specificity.
+9. Aggregate these values for each split 
+10. Average out accuracy measures values for each Depth of tree
 
 # Installation Procedure:
 
